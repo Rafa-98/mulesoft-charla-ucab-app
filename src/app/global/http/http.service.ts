@@ -10,8 +10,7 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
   
-  getPostsFromJsonPlaceholder(){
-    //return this.http.get('https://jsonplaceholder.typicode.com/posts');
+  getPostsFromJsonPlaceholder(){    
     return this.http.get('http://posts-api.us-e2.cloudhub.io/jsonplaceholder/posts');
   }
 
