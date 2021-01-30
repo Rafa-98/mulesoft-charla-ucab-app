@@ -23,4 +23,8 @@ export class HttpService {
     return this.http.get('http://posts-api.us-e2.cloudhub.io/posts');
   }
 
+  saveNewPost(post){
+    return this.http.post('http://posts-api.us-e2.cloudhub.io/save/post', post);
+  }
+
 }

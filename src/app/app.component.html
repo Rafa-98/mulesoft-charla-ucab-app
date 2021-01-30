@@ -49,21 +49,7 @@
         <a class="nav-link">
           <mdb-icon fab icon="instagram"></mdb-icon>
         </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link">
-          <div class="btn-group" mdbDropdown>
-            <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
-            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <div class="divider dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
-            </div>
-          </div>
-        </a>
-      </li>
+      </li>      
     </ul>
   </links>
   <!-- Collapsible content -->
@@ -82,6 +68,9 @@
   <div class="row">
     <div class="col-3">
       <button (click)="getJsonPlaceholderPosts()" type="button" mdbBtn color="primary" class="waves-light requestBtn" mdbWavesEffect><mdb-icon fab icon="get-pocket"></mdb-icon> GET Posts from JSON placeholder</button>
+      <div *ngIf="requestInProgress" class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
     </div>
     <div class="col-3">
       <button (click)="getGorestPosts()" type="button" mdbBtn color="secondary" class="waves-light requestBtn" mdbWavesEffect><mdb-icon fab icon="get-pocket"></mdb-icon> GET Posts from gorest.co.in/</button>
@@ -146,19 +135,19 @@
           
             <div class="md-form">
               <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
-              <input type="text" id="form104" class="form-control" mdbInput>
+              <input [(ngModel)]="post.usuario" type="number" id="form104" class="form-control" mdbInput>
               <label for="form104">userId</label>
             </div>      
           
             <div class="md-form">
               <mdb-icon fas icon="tag" class="prefix grey-text"></mdb-icon>
-              <input type="text" id="form106" class="form-control" mdbInput>
+              <input [(ngModel)]="post.titulo" type="text" id="form106" class="form-control" mdbInput>
               <label for="form106">Title</label>
             </div>
           
             <div class="md-form">
               <mdb-icon fas icon="pencil-alt" class="prefix grey-text"></mdb-icon>
-              <textarea type="text" id="form107" class="md-textarea form-control" rows="5" mdbInput></textarea>
+              <textarea [(ngModel)]="post.cuerpo" type="text" id="form107" class="md-textarea form-control" rows="5" mdbInput></textarea>
               <label for="form107">Body</label>
             </div>
           

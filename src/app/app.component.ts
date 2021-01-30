@@ -28,6 +28,13 @@ export class AppComponent {
   requestType:string = "";
   topMessage:string = "Press a button to make a request";
   posts:any = [];
+  requestInProgress:boolean = false;
+
+  post = {
+    usuario: null,
+    titulo: "",
+    cuerpo: ""
+  }
 
   /*-------------------------------------------------------------------------------------------*/
   onOpen(event: any) {
@@ -40,42 +47,53 @@ export class AppComponent {
   /*--------------------------------------------------------------------------------------------------*/
 
   getJsonPlaceholderPosts(){
+    this.requestInProgress = true;
     console.log("getJsonPlaceholderPosts");
     this.topMessage = "Posts from JSON Placeholder";
     this.requestType = "GET";
     this.httpService.getPostsFromJsonPlaceholder().subscribe((data:jsonPlaceholderPostPayload[]) => {
       this.posts = data;
       console.log("data is: ", this.posts);
+      this.requestInProgress = false;
     })
   }
 
   getGorestPosts(){
+    this.requestInProgress = true;
     console.log("getGorestPosts");
     this.topMessage = "Posts from Gorest.co.in";
     this.requestType = "GET";
     this.httpService.getPostsFromGorest().subscribe((data:gorestPostPayload) => {
       console.log("data is: ", data.data);
       this.posts = data.data;
+      this.requestInProgress = false;
     })
   }
 
   getPostsFromBothSites(){
+    this.requestInProgress = true;
     console.log("getPostsFromBothSites");
     this.topMessage = "Posts from both sites";
     this.requestType = "GET";
     this.httpService.getAllPosts().subscribe((data) => {
       this.posts = data;
+      this.requestInProgress = false;
     })
   }
 
-  sendPostToJsonPlaceholder(){
+  sendPostToJsonPlaceholder(){    
     console.log("sendPostToJsonPlaceholder");
     this.topMessage = "Send new post to JSON Placeholder";
     this.requestType = "POST";
   }
 
-  sendPost(){
-    console.log("sending POST request");
+  sendPost(){    
+    this.requestInProgress = true;
+    console.log("post payload: ", this.post);
+    this.httpService.saveNewPost(this.post).subscribe((data) => {
+      console.log("Response from POST is: ", data);
+      this.requestInProgress = false;
+    })
   }
 
 }
