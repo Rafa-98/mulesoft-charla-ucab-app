@@ -29,6 +29,7 @@ export class AppComponent {
   topMessage:string = "Press a button to make a request";
   posts:any = [];
   requestInProgress:boolean = false;
+  showSuccessMessage:boolean = false;
 
   post = {
     usuario: null,
@@ -48,6 +49,7 @@ export class AppComponent {
 
   getJsonPlaceholderPosts(){
     this.requestInProgress = true;
+    this.showSuccessMessage = false;
     console.log("getJsonPlaceholderPosts");
     this.topMessage = "Posts from JSON Placeholder";
     this.requestType = "GET";
@@ -60,6 +62,7 @@ export class AppComponent {
 
   getGorestPosts(){
     this.requestInProgress = true;
+    this.showSuccessMessage = false;
     console.log("getGorestPosts");
     this.topMessage = "Posts from Gorest.co.in";
     this.requestType = "GET";
@@ -72,6 +75,7 @@ export class AppComponent {
 
   getPostsFromBothSites(){
     this.requestInProgress = true;
+    this.showSuccessMessage = false;
     console.log("getPostsFromBothSites");
     this.topMessage = "Posts from both sites";
     this.requestType = "GET";
@@ -81,7 +85,8 @@ export class AppComponent {
     })
   }
 
-  sendPostToJsonPlaceholder(){    
+  sendPostToJsonPlaceholder(){   
+    this.showSuccessMessage = false; 
     console.log("sendPostToJsonPlaceholder");
     this.topMessage = "Send new post to JSON Placeholder";
     this.requestType = "POST";
@@ -93,6 +98,9 @@ export class AppComponent {
     this.httpService.saveNewPost(this.post).subscribe((data) => {
       console.log("Response from POST is: ", data);
       this.requestInProgress = false;
+      if(data !== null){
+        this.showSuccessMessage = true;
+      }
     })
   }
 
