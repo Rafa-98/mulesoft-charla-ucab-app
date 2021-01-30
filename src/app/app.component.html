@@ -1,0 +1,242 @@
+<!--<div class="row">
+  <div class="col-3">
+    <img src="https://yt3.ggpht.com/ytc/AAUvwnjWtXZMkJv3t5FlWER0hI2PfI1HF0b_gZaa-SrrXc0=s900-c-k-c0x00ffffff-no-rj" class="img-fluid newtomsLogo" alt="Responsive image" style="background-color: rgb(26,26,26);">
+  </div>
+  <div class="col-9">
+    <div style="background-color: rgb(26,26,26); color:white; margin-bottom: -1.2%;" class="text-center">
+      <img src="https://mulesoft.designgrows.com/wp-content/uploads/2019/12/mulesoft-1-905x613.png" class="img-fluid mainImg" alt="Responsive image">
+      <h2>Software Integration made easy</h2>    
+    </div>
+  </div>
+</div>-->
+
+<div class="text-center mainBrand">
+  <img src="https://mulesoft.designgrows.com/wp-content/uploads/2019/12/mulesoft-1-905x613.png" class="img-fluid mainImg" alt="Responsive image">
+  <h5 class="subtitle">Software Integration made easy</h5>    
+</div>
+
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg blue-gradient" style="color:white" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" style="color:white" href="#"><mdb-icon fas icon="lightbulb"></mdb-icon></a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect>Fundamentals<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect>RAML</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect>Anypoint Platform</a>
+      </li>      
+
+    </ul>
+    <!-- Links -->
+
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item">
+        <a class="nav-link">
+          <mdb-icon fab icon="twitter"></mdb-icon>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <mdb-icon fab icon="instagram"></mdb-icon>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <div class="btn-group" mdbDropdown>
+            <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
+            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div class="divider dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </links>
+  <!-- Collapsible content -->
+</mdb-navbar>
+
+<br/>
+
+<div class="text-center">
+  <h3>{{topMessage}}</h3>  
+  <mdb-icon fas icon="arrow-alt-circle-down"></mdb-icon>
+</div>
+
+<br/>
+
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <button (click)="getJsonPlaceholderPosts()" type="button" mdbBtn color="primary" class="waves-light requestBtn" mdbWavesEffect><mdb-icon fab icon="get-pocket"></mdb-icon> GET Posts from JSON placeholder</button>
+    </div>
+    <div class="col-3">
+      <button (click)="getGorestPosts()" type="button" mdbBtn color="secondary" class="waves-light requestBtn" mdbWavesEffect><mdb-icon fab icon="get-pocket"></mdb-icon> GET Posts from gorest.co.in/</button>
+    </div>
+    <div class="col-3">
+      <button (click)="getPostsFromBothSites()" type="button" mdbBtn color="success" class="waves-light requestBtn" mdbWavesEffect><mdb-icon fab icon="get-pocket"></mdb-icon> GET Posts from both sites</button>
+    </div>
+    <div class="col-3">
+      <button (click)="sendPostToJsonPlaceholder()" type="button" mdbBtn color="warning" class="waves-light requestBtn" mdbWavesEffect><mdb-icon fas icon="plus-square"></mdb-icon> send a Post to JSON placeholder</button>
+    </div>
+  </div>
+</div>
+
+<br/>
+
+<div class="container" *ngIf="requestType == 'GET' && posts.length > 0">
+  <div class="row">
+    <div class="col-3 postCard" *ngFor="let post of posts">
+      <mdb-card>
+        <!--Card image-->
+        <mdb-card-img src="https://thecsrjournal.in/wp-content/uploads/2018/10/speed-post.png" alt="Card image cap" class="postImg"></mdb-card-img>
+        <!--Card content-->
+        <mdb-card-body>
+      
+          <!--Title-->
+          <mdb-card-title>
+            <h4>{{post.title}}</h4>
+          </mdb-card-title>
+      
+          <!--Text-->
+          <mdb-card-text> {{post.body}}
+          </mdb-card-text>
+      
+          
+        </mdb-card-body>
+      </mdb-card>
+    </div>  
+
+  </div>
+</div>
+
+<div class="container" *ngIf="requestType == 'POST'">
+  <div class="row">
+    <div class="offset-3 col-6">
+      <!-- Section: form gradient -->
+      <section class="form-gradient mb-5">
+      
+        <!--Form with header-->
+        <mdb-card>
+        
+          <!--Header-->
+          <div class="header peach-gradient">
+          
+            <div class="row d-flex justify-content-center">
+              <h3 class="white-text mb-0 py-5 font-weight-bold">Enter data</h3>
+            </div>
+          
+          </div>
+          <!--Header-->
+        
+          <mdb-card-body class="mx-4">
+          
+            <div class="md-form">
+              <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
+              <input type="text" id="form104" class="form-control" mdbInput>
+              <label for="form104">userId</label>
+            </div>      
+          
+            <div class="md-form">
+              <mdb-icon fas icon="tag" class="prefix grey-text"></mdb-icon>
+              <input type="text" id="form106" class="form-control" mdbInput>
+              <label for="form106">Title</label>
+            </div>
+          
+            <div class="md-form">
+              <mdb-icon fas icon="pencil-alt" class="prefix grey-text"></mdb-icon>
+              <textarea type="text" id="form107" class="md-textarea form-control" rows="5" mdbInput></textarea>
+              <label for="form107">Body</label>
+            </div>
+          
+          
+            <!--Grid row-->
+            <div class="row d-flex align-items-center mb-3 mt-4">
+            
+              <!--Grid column-->
+              <div class="col-md-12">
+                <div class="text-center">
+                  <button type="button" mdbBtn color="grey" rounded="true" class="z-depth-1a" (click)="sendPost()">Send post</button>
+                </div>
+              </div>
+              <!--Grid column-->
+            
+            </div>
+            <!--Grid row-->
+          </mdb-card-body>
+        
+        </mdb-card>
+        <!--/Form with header-->
+      
+      </section>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- Footer -->
+<footer class="page-footer font-small cyan darken-3">
+
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <!-- Grid row-->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-12 py-5">
+        <div class="mb-5 flex-center">
+
+          <!-- Facebook -->
+          <a class="fb-ic">
+            <mdb-icon fab icon="facebook" size="2x" class="white-text mr-md-5 mr-3"></mdb-icon>
+          </a>
+          <!-- Twitter -->
+          <a class="tw-ic">
+              <mdb-icon fab icon="twitter" size="2x" class="white-text mr-md-5 mr-3"></mdb-icon>
+          </a>          
+          <!--Linkedin -->
+          <a class="li-ic">
+              <mdb-icon fab icon="linkedin" size="2x" class="white-text mr-md-5 mr-3"></mdb-icon>
+          </a>
+          <!--Instagram-->
+          <a class="ins-ic">
+              <mdb-icon fab icon="instagram" size="2x" class="white-text mr-md-5 mr-3"></mdb-icon>
+          </a>          
+        </div>
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row-->
+
+  </div>
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2021 NEWTOMS LLC:
+    <a href="https://newtoms.com/"> www.newtoms.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
